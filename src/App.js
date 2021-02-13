@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import './App.css';
 import Form from "./components/Form";
 import TodoList from "./components/TodoList"
@@ -17,27 +17,29 @@ function App() {
 
   // useEffect
   useEffect(() => {
+    const filterHandler = () => {
+      switch(status){
+        case 'completed':
+          setFilterdTodos(todos.filter((todo) => todo.completed === true))
+          break;
+        case 'uncompleted':
+          setFilterdTodos(todos.filter((todo) => todo.completed === false))
+          break;
+        default:
+          setFilterdTodos(todos)
+          break;
+      }
+    }
     filterHandler()
+
+    const saveLocalTodos = () => {
+      localStorage.setItem('todos', JSON.stringify(todos))
+    }
+    
     saveLocalTodos()
   }, [todos, status])
-  //  functions
-  const filterHandler = () => {
-    switch(status){
-      case 'completed':
-        setFilterdTodos(todos.filter((todo) => todo.completed === true))
-        break;
-      case 'uncompleted':
-        setFilterdTodos(todos.filter((todo) => todo.completed === false))
-        break;
-      default:
-        setFilterdTodos(todos)
-        break;
-    }
-  }
 
-  const saveLocalTodos = () => {
-      localStorage.setItem('todos', JSON.stringify(todos))
-  }
+
 
   const getLocalTodos = () => {
     if(localStorage.getItem('todos') === null){
