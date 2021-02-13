@@ -1,3 +1,8 @@
+A quick little ol todo list app
+    - saves into local storage
+    - filtered list if or if not completed
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
